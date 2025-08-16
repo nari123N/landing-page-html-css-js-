@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page - Self Project</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(90deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        header button {
+            padding: 12px 30px;
+            font-size: 1rem;
+            color: #4facfe;
+            background: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        header button:hover {
+            background: #e0e7ff;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 60px 20px;
+            gap: 40px;
+            background-color: #fff;
+        }
+
+        .feature {
+            flex: 1 1 250px;
+            background: #f0f4ff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature h2 {
+            margin-bottom: 15px;
+            color: #4facfe;
+        }
+
+        .feature p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Interactive Button Section */
+        .interactive-section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .interactive-section input[type="text"] {
+            padding: 12px;
+            width: 250px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            transition: 0.3s ease;
+        }
+
+        .interactive-section input[type="text"]:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 10px rgba(79, 172, 254, 0.3);
+        }
+
+        .interactive-section button {
+            padding: 12px 25px;
+            border-radius: 25px;
+            border: none;
+            background-color: #4facfe;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .interactive-section button:hover {
+            background-color: #00f2fe;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            .features {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>My Landing Page Project</h1>
+        <p>Self-directed project showcasing responsive, interactive web design using HTML, CSS, and JavaScript.</p>
+        <button onclick="alert('Welcome to the Landing Page!')">Explore Now</button>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <h2>Responsive Design</h2>
+            <p>Optimized for desktops, tablets, and mobile devices to provide a seamless experience across all screens.</p>
+        </div>
+        <div class="feature">
+            <h2>Interactive Elements</h2>
+            <p>Engaging buttons, input fields, and hover effects to enhance user interaction and navigation.</p>
+        </div>
+        <div class="feature">
+            <h2>Clean UI</h2>
+            <p>A visually appealing layout with modern colors and typography for a professional look and feel.</p>
+        </div>
+    </section>
+    <!-- Game Section -->
+<section class="game-section" style="padding:60px 20px; text-align:center; background:#f0f4ff;">
+    <h2 style="color:#4facfe; margin-bottom:20px;">🎮 Play the Guess the Number Game!</h2>
+    <div id="gameCard" style="display:inline-block; background:white; padding:40px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
+        <p style="font-size:1.1rem; margin-bottom:20px;">Guess a number between <b>1</b> and <b>10</b></p>
+        <input type="number" id="guessInput" placeholder="Enter your guess" min="1" max="10" 
+               style="padding:12px 15px; border-radius:25px; border:1px solid #ccc; margin-right:10px; width:150px; text-align:center;">
+        <button onclick="checkGuess()" 
+                style="padding:12px 25px; border-radius:25px; border:none; background:#4facfe; color:white; cursor:pointer; transition:0.3s;">
+            Guess
+        </button>
+        <p id="gameMessage" style="margin-top:20px; font-weight:bold; font-size:1rem;"></p>
+    </div>
+</section>
+
+<script>
+    // Initialize secret number
+    let secretNumber = Math.floor(Math.random() * 10) + 1;
+
+    function checkGuess() {
+        const userGuess = parseInt(document.getElementById('guessInput').value);
+        const message = document.getElementById('gameMessage');
+        const input = document.getElementById('guessInput');
+
+        if(!userGuess || userGuess < 1 || userGuess > 10){
+            message.textContent = ' Please enter a number between 1 and 10!';
+            message.style.color = 'red';
+        } else if(userGuess === secretNumber){
+            message.textContent = `🎉 Correct! The number was ${secretNumber}. You win!`;
+            message.style.color = 'green';
+            // Reset game after 2 seconds
+            setTimeout(() => {
+                secretNumber = Math.floor(Math.random() * 10) + 1;
+                message.textContent = '';
+                input.value = '';
+            }, 2000);
+        } else if(userGuess < secretNumber){
+            message.textContent = 'Too low! Try again.';
+            message.style.color = 'orange';
+        } else {
+            message.textContent = ' Too high! Try again.';
+            message.style.color = 'orange';
+        }
+    }
+</script>
+
+    <!-- Interactive Section -->
+    <section class="interactive-section">
+        <h2>Try the Interactive Feature!</h2>
+        <input type="text" id="userInput" placeholder="Type your name">
+        <button onclick="greetUser()">Submit</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2023 Narendar Banoth. All rights reserved.
+    </footer>
+
+    <script>
+        // JavaScript interactive feature
+        function greetUser() {
+            const name = document.getElementById('userInput').value;
+            if(name.trim() !== '') {
+                alert(`Hello, ${name}! Welcome to my landing page project.`);
+            } else {
+                alert('Please enter your name to try the feature!');
+            }
+        }
+    </script>
+
+</body>
+</html>
